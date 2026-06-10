@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>PR News</title>
+  </head>
+  <body class="m-0 p-0">
+
+    <div id="scrollProgress"></div>
+
+    <!-- ── NAVBAR ── -->
+    <div class="container-fluid m-0 p-0">
+      <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+        <div class="container-fluid px-4">
+          <a class="navbar-brand" href="#">
+            <span class="brand-pr">PR</span><span class="brand-news">News</span>
+            <span class="brand-dot"></span>
+          </a>
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+              <li class="nav-item">
+                <a class="nav-link nav-pill" aria-current="page" href="#general" id="General">
+                  <span class="nav-icon">🌐</span> General
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-pill" href="#business" id="Business">
+                  <span class="nav-icon">📈</span> Business
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-pill" href="#sports" id="Sports">
+                  <span class="nav-icon">⚽</span> Sports
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-pill" href="#technology" id="Technology">
+                  <span class="nav-icon">💡</span> Tech
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-pill" href="#entertainment" id="Entertainment">
+                  <span class="nav-icon">🎬</span> Entertainment
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-pill" href="#" id="AnalyticsBtn">
+                  <span class="nav-icon">📊</span> Analytics
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-pill" href="#" id="TtsNavBtn">
+                  <span class="nav-icon">🔊</span> TTS
+                </a>
+              </li>
+            </ul>
+            <div class="search-wrapper d-flex align-items-center">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input class="search-input" type="text" id="newsQuery" placeholder="Search stories...">
+              </div>
+              <button class="search-btn" type="button" id="searchBtn">Search</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ── TICKER ── -->
+      <div class="ticker-wrap">
+        <div class="ticker-label">LIVE</div>
+        <div class="ticker-content">
+          <span id="tickerText">Breaking News &nbsp;•&nbsp; Stay informed with PR News &nbsp;•&nbsp; Your daily dose of top stories &nbsp;•&nbsp; Business · Sports · Technology · Entertainment &nbsp;•&nbsp; Breaking News &nbsp;•&nbsp; Stay informed &nbsp;•&nbsp;</span>
+        </div>
+      </div>
+
+      <!-- ── PERSONALIZATION BAR ── -->
+      <div class="pref-bar" id="prefBar">
+        <div class="pref-bar-inner">
+          <span class="pref-label">📌 Your Feed:</span>
+          <div class="pref-chips" id="prefChips">
+            <button class="pref-chip active" data-cat="technology">💡 Tech</button>
+            <button class="pref-chip" data-cat="business">📈 Business</button>
+            <button class="pref-chip" data-cat="sports">⚽ Sports</button>
+            <button class="pref-chip" data-cat="entertainment">🎬 Entertainment</button>
+            <button class="pref-chip" data-cat="general">🌐 General</button>
+          </div>
+          <button class="pref-feed-btn" id="loadFeedBtn">Load My Feed</button>
+        </div>
+      </div>
+
+      <!-- ── TRENDING STRIP ── -->
+      <div class="trending-strip" id="trendingStrip" style="display:none;">
+        <div class="trending-inner">
+          <div class="trending-title">🔥 Trending Now</div>
+          <div class="trending-pills" id="trendingPills"></div>
+        </div>
+      </div>
+
+      <!-- ── ANALYTICS DASHBOARD ── -->
+      <div class="analytics-panel" id="analyticsPanel" style="display:none;">
+        <div class="news-wrapper">
+          <div class="section-header"><h4>News Analytics Dashboard</h4></div>
+          <div class="analytics-grid" id="analyticsGrid"></div>
+        </div>
+      </div>
+
+      <!-- ── MAIN NEWS AREA ── -->
+      <div class="news-wrapper" id="mainNewsWrapper">
+        <div class="section-header" id="newsType">
+          <h4>Headlines</h4>
+        </div>
+        <div class="row g-4 px-3 pb-5" id="newsdetails"></div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <span class="brand-pr">PR</span><span class="brand-news">News</span>
+          </div>
+          <p class="footer-copy">© 2024 Priyanshu<span class="text-warning">Rai</span> — All rights reserved</p>
+          <p class="footer-tagline">Delivering truth, one story at a time.</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ── AI SUMMARY MODAL ── -->
+    <div class="ai-modal-overlay" id="aiModalOverlay">
+      <div class="ai-modal" id="aiModal">
+        <div class="ai-modal-header">
+          <div class="ai-modal-title">
+            <span class="ai-spark">✦</span>
+            <span id="aiModalMode">AI Summary</span>
+          </div>
+          <button class="ai-modal-close" id="aiModalClose">✕</button>
+        </div>
+        <div class="ai-modal-article-title" id="aiModalArticleTitle"></div>
+        <div class="ai-modal-body" id="aiModalBody">
+          <div class="ai-thinking">
+            <div class="ai-dots"><span></span><span></span><span></span></div>
+            <p>Analysing article…</p>
+          </div>
+        </div>
+        <div class="ai-modal-qa" id="aiModalQA" style="display:none;">
+          <div class="ai-qa-input-row">
+            <input class="ai-qa-input" id="aiQaInput" type="text" placeholder="Ask anything about this article…">
+            <button class="ai-qa-send" id="aiQaSend">Ask</button>
+          </div>
+          <div class="ai-qa-history" id="aiQaHistory"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ── TTS MODAL ── -->
+    <div class="tts-modal-overlay" id="ttsModalOverlay">
+      <div class="tts-modal" id="ttsModal">
+        <div class="tts-modal-header">
+          <div class="tts-modal-title">
+            <span class="tts-icon-head">🔊</span>
+            <span>Text to Audio</span>
+          </div>
+          <button class="ai-modal-close" id="ttsModalClose">✕</button>
+        </div>
+        <div class="tts-modal-body">
+          <div class="tts-article-info" id="ttsArticleInfo" style="display:none;">
+            <span class="tts-from-label">Reading:</span>
+            <span class="tts-article-title-text" id="ttsArticleTitleText"></span>
+          </div>
+          <textarea class="tts-textarea" id="ttsTextarea" placeholder="Paste or type any text here, or click 🔊 on a news card to read it aloud…" rows="6"></textarea>
+          <div class="tts-controls">
+            <div class="tts-voice-row">
+              <div class="tts-control-group">
+                <label class="tts-label">Voice</label>
+                <select class="tts-select" id="ttsVoiceSelect"></select>
+              </div>
+              <div class="tts-control-group">
+                <label class="tts-label">Speed <span id="ttsRateVal">1.0</span>x</label>
+                <input type="range" class="tts-range" id="ttsRate" min="0.5" max="2" step="0.1" value="1">
+              </div>
+              <div class="tts-control-group">
+                <label class="tts-label">Pitch <span id="ttsPitchVal">1.0</span></label>
+                <input type="range" class="tts-range" id="ttsPitch" min="0.5" max="2" step="0.1" value="1">
+              </div>
+              <div class="tts-control-group">
+                <label class="tts-label">Volume <span id="ttsVolVal">100</span>%</label>
+                <input type="range" class="tts-range" id="ttsVolume" min="0" max="1" step="0.05" value="1">
+              </div>
+            </div>
+            <div class="tts-btn-row">
+              <button class="tts-btn tts-btn-play" id="ttsPlayBtn">▶ Play</button>
+              <button class="tts-btn tts-btn-pause" id="ttsPauseBtn" disabled>⏸ Pause</button>
+              <button class="tts-btn tts-btn-stop" id="ttsStopBtn" disabled>⏹ Stop</button>
+              <button class="tts-btn tts-btn-clear" id="ttsClearBtn">🗑 Clear</button>
+            </div>
+          </div>
+          <div class="tts-progress-wrap" id="ttsProgressWrap" style="display:none;">
+            <div class="tts-progress-bar" id="ttsProgressBar"></div>
+          </div>
+          <div class="tts-status" id="ttsStatus">Ready</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+      window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (scrollTop / scrollHeight) * 100;
+        document.getElementById('scrollProgress').style.width = progress + '%';
+      });
+
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('mainNav');
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+
+      document.querySelectorAll('.nav-pill').forEach(link => {
+        link.addEventListener('click', function() {
+          document.querySelectorAll('.nav-pill').forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      document.getElementById('newsQuery').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') document.getElementById('searchBtn').click();
+      });
+    </script>
+  </body>
+</html>
